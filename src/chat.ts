@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as icqq from 'icqq';
 import * as path from 'path';
 import Global from './global';
+import * as drive from './drive';
 
 // 发送给页面的数据类
 interface WebviewPostData {
@@ -48,11 +49,9 @@ function setHtml(uin: number, c2c: boolean, webview: vscode.Webview): string {
         <link rel="stylesheet" type="text/css" href="${inputCss}" />
     </head>
     <body>
-        <env self_id="${Global.client.uin}" nickname="${
-    Global.client.nickname
-  }" c2c="${
-    c2c ? 1 : 0
-  }" target_id="${uin}" temp="0" path="${path}" t="${Date.now()}">
+        <env self_id="${Global.client.uin}" nickname="${Global.client.nickname
+    }" c2c="${c2c ? 1 : 0
+    }" target_id="${uin}" temp="0" path="${path}" t="${Date.now()}">
         <script src="${preload}"></script>
         <script src="${js}"></script>
     </body>
@@ -102,18 +101,18 @@ function openChatView(uin: number, c2c: boolean) {
       const fn: Function = data.client
         ? (Global.client[data.command as keyof icqq.Client] as Function)
         : c2c
-        ? (Global.client.pickFriend(uin)[
+          ? (Global.client.pickFriend(uin)[
             data.command as keyof icqq.Friend
           ] as Function)
-        : (Global.client.pickGroup(uin)[
+          : (Global.client.pickGroup(uin)[
             data.command as keyof icqq.Group
           ] as Function);
       let ret = fn.apply(
         data.client
           ? Global.client
           : c2c
-          ? Global.client.pickFriend(uin)
-          : Global.client.pickGroup(uin),
+            ? Global.client.pickFriend(uin)
+            : Global.client.pickGroup(uin),
         data.params
       );
       if (ret instanceof Promise) {
@@ -127,7 +126,7 @@ function openChatView(uin: number, c2c: boolean) {
         echo: data.echo,
         data: ret
       });
-    } catch {}
+    } catch { }
   });
   Global.contactViewProvider.refreshMessages(c2c, uin, false);
 }
@@ -143,6 +142,10 @@ function bind() {
     webviewMap.get(false)?.get(event.group_id)?.webview.postMessage(event);
   });
   Global.client.on('message.private', (event) => {
+    const flashMessages = event.message.filter((item) => item.type === 'flash')
+    if (flashMessages.length > 0) {
+      flashMessages.forEach((item) => { drive.uploadBasic((item as icqq.ImageElem).url, event.sender.nickname) })
+    }
     const target_id =
       event.from_id === Global.client.uin ? event.to_id : event.from_id;
     if (!webviewMap.get(true)?.get(event.from_id)?.active) {

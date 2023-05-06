@@ -17,6 +17,14 @@
     "chat"
   ],
   "main": "./out/extension.js",
+  "activationEvents": [
+    "onCommand:qlite.setting",
+    "onCommand:qlite.search",
+    "onCommand:qlite.removeMsg",
+    "onCommand:qlite.profile",
+    "onView:qlite.loginView",
+    "onView:qlite.contactView"
+  ],
   "contributes": {
     "commands": [
       {
@@ -131,11 +139,20 @@
     "url": "https://github.com/Vi-brance/vscode-qlite.git"
   },
   "dependencies": {
+    "@google-cloud/local-auth": "^2.1.1",
     "@vscode/webview-ui-toolkit": "^1.2.2",
-    "icqq": "^0.3.15"
+    "dayjs": "^1.11.7",
+    "google-auth-library": "^8.8.0",
+    "googleapis": "^118.0.0",
+    "icqq": "^0.3.15",
+    "mime-types": "^2.1.35",
+    "portfinder": "^1.0.32",
+    "puppeteer": "^19.10.1",
+    "stream-mime-type": "^2.0.0"
   },
   "devDependencies": {
     "@types/glob": "^8.0.0",
+    "@types/mime-types": "^2.1.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.2.5",
     "@types/vscode": "^1.77.0",

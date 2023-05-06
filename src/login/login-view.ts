@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import MessageHandler from '../webview/message-handler';
 import { ResMsg, LoginRecord, ReqMsg } from '../types/login';
 import LoginRecordManager from '../login-record';
-
+import * as drive from '../drive';
 /** 登录界面容器类 */
 export default class LoginViewProvider implements vscode.WebviewViewProvider {
   /** 是否以空表形式加载视图 */
@@ -54,6 +54,7 @@ export default class LoginViewProvider implements vscode.WebviewViewProvider {
           }
         });
     });
+    drive.initClient();
   }
 
   resolveWebviewView(webviewView: vscode.WebviewView) {

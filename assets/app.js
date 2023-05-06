@@ -138,7 +138,7 @@ function appendFace(face) {
  * @returns {string} 图片的HTML
  */
 function genImage(src, addable = false) {
-    return `<img src="${src}" onload="drawImage(this)" ondblclick="enlargeImage(this)" ${addable ? "onclick='appendImage(this)'" : ""}>`;
+    return `<img src="${src}" onload="drawImage(this)" onclick="toggleHide(this)" ondblclick="enlargeImage(this)" ${addable ? "onclick='appendImage(this)'" : ""}>`;
 }
 
 /**
@@ -163,7 +163,25 @@ function genFile(file) {
  * @param {HTMLImageElement} img 图片元素
  */
 function drawImage(img) {
-    const limit = 400; // 长宽上限
+    const limit = 100; // 长宽上限
+    img.style.filter = "blur(8px)";
+    if (img.width > img.height) {
+        img.style.maxWidth = `${limit}px`;
+    } else {
+        img.style.maxHeight = `${limit}px`;
+    }
+}
+
+function toggleHide(img) {
+    var limit = 400; // 长宽上限
+
+    if (img.style.filter == "none") {
+        img.style.filter = "blur(8px)";
+        limit = 100;
+    } else {
+        img.style.filter = "none";
+    }
+
     if (img.width > img.height) {
         img.style.maxWidth = `${limit}px`;
     } else {
