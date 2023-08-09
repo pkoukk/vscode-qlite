@@ -1,0 +1,23 @@
+name: 功能追加/改善
+description: 建议增加的功能、设置等内容。
+title: "[Feature] "
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 功能描述
+      description: 对想要增加/改善的功能进行简单的描述
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: 用户体验
+      description: 该功能的追加/改善会对用户产生什么效果
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: 额外内容
+      description: 有什么额外想说的，可以在这里写

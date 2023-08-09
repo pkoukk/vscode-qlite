@@ -1,0 +1,60 @@
+name: BUG反馈
+description: 请在此处反馈您在使用中遇到的BUG。
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请在使用最新版本的情况下检查问题是否仍然存在，且检查是否有未结束的issue已提出此问题，再提交BUG反馈。
+        遇到BUG时，请打开VSCode的开发者窗口检查是否出现报错，并与该issue一并提交，感谢您对QLite扩展的支持。
+  - type: textarea
+    id: observed
+    attributes:
+      label: 问题描述
+      description: 在使用扩展时遇到的问题
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+      description: 在预期下扩展应该执行的操作
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      description: 关于如何触发到该BUG的步骤
+      placeholder: |
+        1. 打开VSCode的QLite扩展页
+        2. 输入您的QQ账号/密码
+        3. 点击登录
+    validations:
+      required: true
+  - type: input
+    id: qlite-version
+    attributes:
+      label: QLite版本
+      description: 发现此BUG的版本
+      placeholder: 1.5.4
+    validations:
+      required: true
+  - type: input
+    id: vscode-version
+    attributes:
+      label: VSCode版本
+      description: 当前使用的版本号。[在Help->About中可以看到]
+      placeholder: 1.80.0
+    validations:
+      required: true
+  - type: input
+    id: window-version
+    attributes:
+      label: 系统版本
+      description: 非必须，但部分BUG可能会因为系统版本不同带来不一样的问题。
+      placeholder: Windows 10 (64bit) 专业版
+  - type: textarea
+    id: extra
+    attributes:
+      label: 额外内容
+      description: 有什么额外想说的，可以在这里写
