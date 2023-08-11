@@ -16,6 +16,9 @@
     "icqq",
     "chat"
   ],
+  "activationEvents": [
+    "onView:qlite"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
