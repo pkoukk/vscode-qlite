@@ -14,6 +14,7 @@ import ChatViewManager from './chat/chat-view';
 import ContactTreeDataProvider from './contact/contact-tree';
 import LoginViewProvider from './login/login-view';
 import { Messenger } from 'vscode-messenger';
+import { DriveAuthenticator } from './drive/driveAuthenticator';
 
 /**
  * 获取用户登录协议设置
@@ -57,6 +58,8 @@ export default class Global {
   static chatViewManager: ChatViewManager;
   /** 消息处理器 */
   static messenger: Messenger;
+
+  static authenticator: DriveAuthenticator;
 
   constructor(context: ExtensionContext) {
     Global.context = context;

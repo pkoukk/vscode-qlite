@@ -47,7 +47,10 @@ const extensionConfig: Configuration = {
   target: 'node',
   entry: './src/extension.ts',
   module: {
-    rules: [{ test: /\.ts$/, exclude: /node_modules/, use: 'ts-loader' }]
+    rules: [
+      { test: /\.ts$/, exclude: /node_modules/, use: 'ts-loader' },
+      { test: /\.node$/, loader: 'node-loader' }
+    ]
   },
   output: {
     path: outDir,

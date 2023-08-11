@@ -176,7 +176,6 @@ export default function msgElemToNode(msgElemList: MessageElem[]): ChildNode[] {
         );
         break;
       case 'flash':
-        message.push(createImgElem(msgElem.url as string, false));
         break;
       case 'image':
         message.push(createImgElem(msgElem.url as string, msgElem.asface));

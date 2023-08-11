@@ -127,7 +127,13 @@
   },
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^1.2.2",
+    "google-auth-library": "^9.0.0",
+    "googleapis": "^124.0.0",
     "icqq": "^0.4.12",
+    "keytar": "^7.9.0",
+    "mime-types": "^2.1.35",
+    "server-destroy": "^1.0.1",
+    "stream-mime-type": "^2.0.0",
     "vscode-messenger": "^0.4.5",
     "vscode-messenger-common": "^0.4.5",
     "vscode-messenger-webview": "^0.4.5",
@@ -135,6 +141,7 @@
   },
   "devDependencies": {
     "@types/glob": "^8.0.0",
+    "@types/mime-types": "^2.1.1",
     "@types/node": "^20.2.5",
     "@types/vscode": "^1.77.0",
     "@types/vscode-webview": "^1.57.1",

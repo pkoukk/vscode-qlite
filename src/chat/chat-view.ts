@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import Global, { getHtmlForWebview } from '../global';
 import * as chat from '../message/chat';
 import { ChatType, parseMsgId } from '../message/parse-msg-id';
+import { saveMessage, saveMessages } from './drive';
 
 /** 聊天页面的管理类 */
 export default class ChatViewManager {
@@ -70,6 +71,7 @@ export default class ChatViewManager {
               msgParticipant,
               event
             );
+            saveMessage(event);
           })
         : Global.client.on('message.group', (event) => {
             if (event.group_id !== uin) {
@@ -128,6 +130,7 @@ export default class ChatViewManager {
           chatHistory = await friend.getChatHistory(
             msgid ? parseMsgId(ChatType.Friend, msgid).time : undefined
           );
+          saveMessages(chatHistory);
         } else {
           const group: icqq.Group = Global.client.pickGroup(uin);
           chatHistory = await group.getChatHistory(
