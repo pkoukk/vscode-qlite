@@ -66,7 +66,9 @@ export class CredentialsConfigurator {
         const service = google.drive({ version: 'v3', auth });
         service.files
           .list({ pageSize: 1, fields: 'files(id)' })
-          .then((res) => {})
+          .then((res) => {
+            console.log(res);
+          })
           .catch((err) => {
             console.log(err);
           });

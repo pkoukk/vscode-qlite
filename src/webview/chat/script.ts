@@ -305,6 +305,7 @@ sendButton.addEventListener('click', function (this: webviewUiToolkit.Button) {
   messenger
     .sendRequest(chat.sendMsg, { type: 'extension' }, { content: msgElems })
     .then((msg) => {
+      console.log('message return result', msg);
       if (!msg) {
         return console.error('ChatView sendMessage: get msg failed');
       }

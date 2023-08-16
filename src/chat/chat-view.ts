@@ -29,6 +29,7 @@ export default class ChatViewManager {
     Global.client.on('message.private', (event: icqq.PrivateMessageEvent) => {
       const uin =
         event.from_id === Global.client.uin ? event.to_id : event.from_id;
+        saveMessage(event);
       if (!this.panelMap[ChatType.Friend].get(uin)?.active) {
         Global.contactViewProvider.refreshMessages(ChatType.Friend, uin, true);
       }
@@ -157,6 +158,7 @@ export default class ChatViewManager {
         if (!ret) {
           vscode.window.showWarningMessage('消息无法显示，请重新打开此页面');
         }
+        console.log('message send result', ret);
         return ret;
       },
       { sender: msgParticipant }

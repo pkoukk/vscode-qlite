@@ -5,19 +5,17 @@ import Global from './global';
 import { CredentialsManager } from './drive/credentialsManager';
 import { DriveAuthenticator } from './drive/driveAuthenticator';
 import { CredentialsConfigurator } from './drive/credentialsConfigurator';
-import { listFiles } from './chat/drive';
 
 /** 扩展启动 */
 export function activate(context: ExtensionContext) {
   // qlite.isOnline = false
   commands.executeCommand('setContext', 'qlite.isOnline', false);
   new Global(context);
-  const credentialsManager = new CredentialsManager();
+  const credentialsManager = new CredentialsManager(Global.rootDir);
   const driveAuthenticator = new DriveAuthenticator(credentialsManager);
   const credentialsConfigurator = new CredentialsConfigurator(
     driveAuthenticator
   );
-  console.log('init credentialsConfigurator');
   Global.authenticator = driveAuthenticator;
   // 注册扩展命令
   context.subscriptions.push(

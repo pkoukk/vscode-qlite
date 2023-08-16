@@ -48,7 +48,7 @@ async function loadUploaded(service: drive_v3.Drive): Promise<void> {
     });
     const files = res.data.files;
     if (files && files.length > 0) {
-      files.map((file) => {
+      files.forEach((file) => {
         if (file.name) {
           const id = getMessageIdOfImageName(file.name);
           uploaded.add(id);
@@ -91,10 +91,12 @@ export async function saveMessage(param: PrivateMessage | GroupMessage) {
   if (param.message_type !== 'private') {
     return;
   }
+  await getClient();
   if (uploaded.has(param.message_id)) {
     return;
   }
   const senderName = param.sender.nickname;
+  let hasUploaded = false;
   for (let i = 0; i < param.message.length; i++) {
     const elem = param.message[i];
     switch (elem.type) {
@@ -102,10 +104,12 @@ export async function saveMessage(param: PrivateMessage | GroupMessage) {
       case 'flash':
         const imageName = buildImageName(param.message_id, senderName, i);
         await uploadBasic(elem.url, imageName);
-        break;
+        hasUploaded = true;
     }
   }
-  uploaded.add(param.message_id);
+  if (hasUploaded) {
+    uploaded.add(param.message_id);
+  }
 }
 
 function buildImageName(messageId: string, sender: string, id: number): string {

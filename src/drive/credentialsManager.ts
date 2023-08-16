@@ -1,12 +1,16 @@
 import * as os from 'os';
 import { EnvCredentialsProvider } from './envCredentialsProvider';
+import { FsCredentialsProvider } from './fsCredentialsProvider';
 
 export const CREDENTIALS_JSON_SERVICE = 'Google Drive for VSCode - Credentials';
 export const TOKENS_JSON_SERVICE = 'Google Drive for VSCode - Token';
 
 export class CredentialsManager {
-  private credentialsProvider: ICredentialsProvider =
-    new EnvCredentialsProvider();
+  private credentialsProvider: ICredentialsProvider;
+
+  constructor(rootDir: string) {
+    this.credentialsProvider = new FsCredentialsProvider(rootDir);
+  }
 
   changeProvider(provider: ICredentialsProvider): void {
     this.credentialsProvider = provider;
