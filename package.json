@@ -127,6 +127,7 @@
   },
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^1.2.2",
+    "dayjs": "^1.11.9",
     "google-auth-library": "^9.0.0",
     "googleapis": "^124.0.0",
     "icqq": "^0.4.12",

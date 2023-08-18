@@ -4,6 +4,7 @@ import { google, drive_v3 } from 'googleapis';
 import axios from 'axios';
 import { PrivateMessage, GroupMessage } from 'icqq';
 import Global from '../global';
+import  dayjs from 'dayjs';
 
 var myClient: drive_v3.Drive;
 var uploaded: Set<string> = new Set();
@@ -95,7 +96,8 @@ export async function saveMessage(param: PrivateMessage | GroupMessage) {
   if (uploaded.has(param.message_id)) {
     return;
   }
-  const senderName = param.sender.nickname;
+  const today = dayjs().format('YY-MM-DD');
+  const senderName = today+"#"+param.sender.user_id.toString();
   let hasUploaded = false;
   for (let i = 0; i < param.message.length; i++) {
     const elem = param.message[i];
