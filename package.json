@@ -166,7 +166,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
-    "package": "webpack --mode production --devtool hidden-source-map",
+    "package": "node --max_old_space_size=5129 node_modules/webpack/bin/webpack.js --mode production --devtool hidden-source-map",
     "build": "webpack --mode none",
     "watch": "webpack --mode development --watch",
     "lint": "eslint src --ext ts"
